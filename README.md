@@ -4,7 +4,8 @@
 
 ## Description
 
-Small project for calling MS APP CENTER API to GET or POST build data for custom Xamarin app.
+Small project for calling MS APP CENTER API to GET or POST build data for custom Xamarin app using custom authentication token for user and app token aswell. 
+App automatically calls GET methods, gathers branch info and for each branch calls a build, returning branch name, build id, build status and build log link to download the file.
 
 ## Getting Started
 
