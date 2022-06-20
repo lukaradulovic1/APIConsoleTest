@@ -11,6 +11,10 @@ namespace APICallerAppConsole
 {
     public class Program
     {
+        /// <summary>
+        /// App for calling api in APP Center
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             // Deserailize first JSON list of branches, get json branch model
