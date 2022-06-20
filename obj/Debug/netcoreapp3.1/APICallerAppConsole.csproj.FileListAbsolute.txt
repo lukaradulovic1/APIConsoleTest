@@ -1,0 +1,16 @@
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\bin\Debug\netcoreapp3.1\APICallerAppConsole.exe
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\bin\Debug\netcoreapp3.1\APICallerAppConsole.deps.json
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\bin\Debug\netcoreapp3.1\APICallerAppConsole.runtimeconfig.json
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\bin\Debug\netcoreapp3.1\APICallerAppConsole.runtimeconfig.dev.json
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\bin\Debug\netcoreapp3.1\APICallerAppConsole.dll
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\bin\Debug\netcoreapp3.1\APICallerAppConsole.pdb
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.csproj.AssemblyReference.cache
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.AssemblyInfoInputs.cache
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.AssemblyInfo.cs
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.csproj.CoreCompileInputs.cache
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.dll
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.pdb
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.genruntimeconfig.cache
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Luka\Documents\GitHub\crispy-doodle\APICallerAppConsole\obj\Debug\netcoreapp3.1\APICallerAppConsole.csproj.CopyComplete

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "qI17mIkTvbUD/pnR6FPsstKVhvNpAjvC6u7dLX4OCym1dRT5L3OC3ndRtigWBLKAEHZ9aVlwEb7fGMGFJXCy/w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Luka\\Documents\\GitHub\\crispy-doodle\\APICallerAppConsole\\APICallerAppConsole.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Luka\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
