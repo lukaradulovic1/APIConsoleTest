@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 
 namespace APICallerAppConsole
-{// Root myDeserializedClass = JsonSerializer.Deserialize<List<Root>>(myJsonResponse);
+{
     public class Branch
     {
         [JsonPropertyName("name")]
@@ -100,7 +98,7 @@ namespace APICallerAppConsole
         public List<object> Checks { get; set; }
     }
 
-    public class Root
+    public class BranchInfo
     {
         [JsonPropertyName("branch")]
         public Branch Branch { get; set; }
@@ -114,6 +112,11 @@ namespace APICallerAppConsole
         [JsonPropertyName("trigger")]
         public string Trigger { get; set; }
     }
+
+    public class BuildSource
+    {
+        public string sourceVersion { get; set; }
+        public bool debug { get; set; }
+    }
+
 }
-
-

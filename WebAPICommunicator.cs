@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading;
 
 namespace APICallerAppConsole
@@ -10,83 +7,70 @@ namespace APICallerAppConsole
     {
         public const string userToken = "d51f9803a5415da3ebb1c3e23694566a89066d62";
         public const string appName = "Xamarin-antistress-app";
+        private const int sleepSeconds = 125000;
+        private const int retrySeconds = 15000;
 
-        // Gather all neccessary variables needed for the API calls
-        private void AcquireAPICommunicationParameters(out WebAPIClient webAPIClient, out List<Root> jsonBranchModelList, out List<string> branchNamesList, out string branchNameLastBuild, out string buildStatus)
+        /// <summary>
+        /// Print out all branch names
+        /// </summary>
+        /// <param name="webAPIClient"></param>
+        private void PrintBranches(WebAPIClient webAPIClient)
         {
-            // Deserailize first JSON list of branches, get json branch models and its values
-            webAPIClient = new WebAPIClient();
-            var stringToDeserialize = webAPIClient.GetBranchesList(userToken, appName);
-            jsonBranchModelList = JsonConvert.DeserializeObject<List<Root>>(stringToDeserialize);
-            branchNamesList = jsonBranchModelList.Select(x => x.Branch.Name).ToList();
-            branchNameLastBuild = string.Empty;
-            buildStatus = string.Empty;
+            var branchInfoList = webAPIClient.GetBranchesList(userToken, appName);
 
             Console.WriteLine("Available branches are: ");
-            foreach (var branch in branchNamesList)
+            foreach (var branch in branchInfoList)
             {
-                Console.WriteLine(branch);
+                Console.WriteLine(branch.Branch.Name);
             }
         }
 
-        // Execute communication with Web API and call POST method that creates a build, waits 2 minutes for completion and depending on output waits or prints out the results
+        /// <summary>
+        /// Execute communication with Web API and call POST method that creates a build, waits 2 minutes for completion and depending on output waits or prints out the results
+        /// </summary>
         public void ExecuteAPICommunication()
         {
-            WebAPIClient webAPIClient;
-            List<Root> jsonBranchModelList;
-            List<string> branchNamesList;
-            string branchNameLastBuild, buildStatus;
-            AcquireAPICommunicationParameters(out webAPIClient, out jsonBranchModelList, out branchNamesList, out branchNameLastBuild, out buildStatus);
-
+            var webAPIClient = new WebAPIClient();
+            PrintBranches(webAPIClient);
+            var branchInfoList = webAPIClient.GetBranchesList(userToken, appName);
 
             // Deserailize and get latest build info after posting
-            var stringToDeserializeUpdated = string.Empty;
-            List<Root> jsonBranchModelListUpdated = new List<Root>();
-
-            foreach (var branch in branchNamesList)
+            foreach (var branch in branchInfoList)
             {
-
                 // Create build
-                Console.WriteLine($"\nCalling Post method that creates a new build on {branch} branch");
-                webAPIClient.PostCreateBuild(branch, userToken);
+                Console.WriteLine($"\nCalling Post method that creates a new build on {branch.Branch.Name} branch");
+                webAPIClient.CreateBuild(branch.Branch.Name, userToken, branch.Branch.Commit.Sha);
 
                 Console.WriteLine("Waiting for build response.");
-                Thread.Sleep(125000);
+                Thread.Sleep(sleepSeconds);
 
-                PrintUpdatedBranchBuildInfo(webAPIClient, out branchNameLastBuild, out buildStatus, out stringToDeserializeUpdated, out jsonBranchModelListUpdated, branch);
-
+                PrintUpdatedBranchBuildInfo(webAPIClient, branch);
             }
         }
 
-        // Print out branch build values and log the creation in case the build is not complete in expected time interval
-        private void PrintUpdatedBranchBuildInfo(WebAPIClient webAPIClient, out string branchNameLastBuild, out string buildStatus, out string stringToDeserializeUpdated, out List<Root> jsonBranchModelListUpdated, string branch)
+        /// <summary>
+        /// Print out branch build values and log the creation in case the build is not complete in expected time interval
+        /// </summary>
+        /// <param name="webAPIClient"></param>
+        /// <param name="branch"></param>
+        private void PrintUpdatedBranchBuildInfo(WebAPIClient webAPIClient, BranchInfo branch)
         {
             // Update build info from branch
-
-            Console.WriteLine("Getting branch values from JSON response\n");
-            stringToDeserializeUpdated = webAPIClient.GetBranchesList(userToken, appName);
-            Console.WriteLine("Updating branch data after POST method\n");
-            jsonBranchModelListUpdated = JsonConvert.DeserializeObject<List<Root>>(stringToDeserializeUpdated);
-            Console.WriteLine("Getting last build from branch\n");
-            branchNameLastBuild = jsonBranchModelListUpdated.Where(x => x.Branch.Name.Contains(branch)).Select(x => x.LastBuild.BuildNumber).FirstOrDefault();
-            Console.WriteLine("Getting build status of current build\n");
-            buildStatus = jsonBranchModelListUpdated.Where(x => x.Branch.Name.Contains(branch)).Select(x => x.LastBuild.Status).FirstOrDefault();
-            Console.WriteLine($"Current build status is {buildStatus}\n");
-
-            bool isComplete = false;
-            while (!isComplete)
+            bool isCompleted = false;
+            do
             {
-                Console.WriteLine("Retrying for new build status.\n");
-                if (buildStatus.Contains("completed"))
+                if (branch.LastBuild.Status.Contains("completed"))
                 {
-                    Console.WriteLine($"Branch: {branch} Build ID: {branchNameLastBuild} Build status: {buildStatus} \nBuild log link: {webAPIClient.GetBuildLogsLink(branchNameLastBuild)}\n");
-                    isComplete = true;
+                    Console.WriteLine(
+                        $"Branch: {branch.Branch.Name} " +
+                        $"Build ID: {branch.LastBuild.Id} " +
+                        $"Build status: {branch.LastBuild.Status} \n" +
+                        $"Build log link: {webAPIClient.GenerateBuildLogLink(branch.LastBuild.BuildNumber)}\n");
+                    isCompleted = true;
                 }
-                Thread.Sleep(15000);
-                stringToDeserializeUpdated = webAPIClient.GetBranchesList(userToken, appName);
-                jsonBranchModelListUpdated = JsonConvert.DeserializeObject<List<Root>>(stringToDeserializeUpdated);
-                buildStatus = jsonBranchModelListUpdated.Where(x => x.Branch.Name.Contains(branch)).Select(x => x.LastBuild.Status).FirstOrDefault();
+                Thread.Sleep(retrySeconds);
             }
+            while (!isCompleted);
         }
     }
 }
