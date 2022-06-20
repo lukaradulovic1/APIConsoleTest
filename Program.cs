@@ -101,15 +101,15 @@ namespace APICallerAppConsole
         public static void PostCreateBuild(string branchName)
         {
             // Post method
-            string postBuildUrl = String.Format($"https://api.appcenter.ms/v0.1/apps/lukaradulovic1/Xamarin-antistress-app/branches/{branchName}/builds");
+            string postBuildUrl = String.Format($"https://api.appcenter.ms/v0.1/apps/lukaradulovic2/Xamarin-antistress-app/branches/{branchName}/builds");
             WebRequest postBuildWebRequest = (HttpWebRequest)WebRequest.Create(postBuildUrl);
-            string userTokenPost = "2b2daebe91b83bc7844e7f20b9efb37d5d106d49";
+            string userTokenPost = "d51f9803a5415da3ebb1c3e23694566a89066d62";
             postBuildWebRequest.ContentType = "application/json";
 
 
 
             postBuildWebRequest.Headers.Add("X-API-Token", userTokenPost);
-            postBuildWebRequest.Headers.Add("owner_name", "lukaradulovic1");
+            postBuildWebRequest.Headers.Add("owner_name", "lukaradulovic2");
             postBuildWebRequest.Headers.Add("branch", branchName);
             postBuildWebRequest.Headers.Add("app_name", "Xamarin-antistress-app");
             postBuildWebRequest.Method = "POST";
@@ -130,16 +130,16 @@ namespace APICallerAppConsole
         public string GetBranchesList()
         {
             // Get list of branches method
-            string userUrlPage = String.Format("https://api.appcenter.ms/v0.1/apps/lukaradulovic1/Xamarin-antistress-app/branches");
+            string userUrlPage = String.Format("https://api.appcenter.ms/v0.1/apps/lukaradulovic2/Xamarin-antistress-app/branches");
             WebRequest requestObject = WebRequest.Create(userUrlPage);
             HttpWebResponse responseObjectGet = null;
-            string userTokenGet = "2b2daebe91b83bc7844e7f20b9efb37d5d106d49";
+            string userTokenGet = "d51f9803a5415da3ebb1c3e23694566a89066d62";
 
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(userTokenGet);
 
             requestObject.Headers.Add("X-API-Token", userTokenGet);
-            requestObject.Headers.Add("owner_name", "lukaradulovic1");
+            requestObject.Headers.Add("owner_name", "lukaradulovic2");
             requestObject.Headers.Add("app_name", "Xamarin-antistress-app");
             requestObject.Method = "GET";
             responseObjectGet = (HttpWebResponse)requestObject.GetResponse();
@@ -154,7 +154,7 @@ namespace APICallerAppConsole
         }
         public static string GetBuildLogsLink(string buildID)
         {
-            return string.Format($"https://api.appcenter.ms/v0.1/apps/lukaradulovic1/Xamarin-antistress-app/builds/{buildID}/logs?build_id={buildID}&owner_name=lukaradulovic1&app_name=Xamarin-antistress-app");
+            return string.Format($"https://api.appcenter.ms/v0.1/apps/lukaradulovic2/Xamarin-antistress-app/builds/{buildID}/logs?build_id={buildID}&owner_name=lukaradulovic2&app_name=Xamarin-antistress-app");
         }
     }
 
