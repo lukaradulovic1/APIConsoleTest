@@ -17,10 +17,14 @@ namespace APICallerAppConsole
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            ExecuteAPICommunication();
+            WebAPIClient.ExecuteAPICommunication();
         }
 
-        private static void ExecuteAPICommunication()
+        
+    }
+    public class WebAPIClient
+    {
+        public static void ExecuteAPICommunication()
         {
             WebAPIClient webAPIClient;
             List<Root> jsonBranchModelList;
@@ -39,7 +43,7 @@ namespace APICallerAppConsole
 
                 CreateBuildPOSTMethod(branch);
 
-                Console.WriteLine("Wait 2 minutes for build response.");
+                Console.WriteLine("Waiting for build response.");
                 Thread.Sleep(300000);
 
                 PrintUpdatedBranchBuildInfo(webAPIClient, out branchNameLastBuild, out buildStatus, out stringToDeserializeUpdated, out jsonBranchModelListUpdated, branch);
@@ -93,9 +97,7 @@ namespace APICallerAppConsole
             branchNameLastBuild = string.Empty;
             buildStatus = string.Empty;
         }
-    }
-    public class WebAPIClient
-    {
+
         public static void PostCreateBuild(string branchName)
         {
             // Post method
