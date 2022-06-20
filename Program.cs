@@ -39,7 +39,8 @@ namespace APICallerAppConsole
                 Console.WriteLine($"Calling Post method that creates a new build on {branch} branch");
                 PostCreateBuild(branch);
 
-                Thread.Sleep(300000);
+                Console.WriteLine("Wait 2 minutes for build response.");
+                Thread.Sleep(180000);
 
                 // Update build info from branch
 
@@ -90,6 +91,7 @@ namespace APICallerAppConsole
             }
             HttpWebResponse responseObjectPost = null;
             responseObjectPost = (HttpWebResponse)postBuildWebRequest.GetResponse();
+            Console.WriteLine("Create build initiated.");
         }
 
         private string GetBranchesList()
