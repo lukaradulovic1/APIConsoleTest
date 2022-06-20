@@ -35,12 +35,12 @@ namespace APICallerAppConsole
 
             foreach (var branch in branchNamesList)
             {
-                GetCurrentBranchBuildInfo(jsonBranchModelList, out branchNameLastBuild, out buildStatus, branch);
+             //   GetCurrentBranchBuildInfo(jsonBranchModelList, out branchNameLastBuild, out buildStatus, branch);
 
                 CreateBuildPOSTMethod(branch);
 
                 Console.WriteLine("Waiting for build response.");
-                Thread.Sleep(300000);
+                Thread.Sleep(125000);
 
                 PrintUpdatedBranchBuildInfo(webAPIClient, out branchNameLastBuild, out buildStatus, out stringToDeserializeUpdated, out jsonBranchModelListUpdated, branch);
 
