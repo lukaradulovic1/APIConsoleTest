@@ -5,7 +5,7 @@ namespace APICallerAppConsole
 {
     public class WebAPICommunicator
     {
-        public const string userToken = "d51f9803a5415da3ebb1c3e23694566a89066d62";
+        public const string userToken = "b52df88cf9cdfa32c7bb9fd2aae633e73ebf4ba8";
         public const string appName = "Xamarin-antistress-app";
         private const int sleepSeconds = 125000;
         private const int retrySeconds = 15000;
